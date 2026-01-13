@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Tanzu's Creation</title>
+  <style>
+    /* ========== Root Colors ========== */
+    :root {
+      --green: #1F392C;
+      --cream: #FAF8F3;
+      --gold: #D4C9A3;
+      --dark: #111;
+      --light: #fff;
+    }
+
+    /* ========== Global Styles ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--green);
+      margin-bottom: 30px;
+    }
+
+    .checkout-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: var(--light);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .order-summary {
+      margin-bottom: 30px;
+    }
+
+    .order-summary h2 {
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--gold);
+      color: var(--dark);
+    }
+
+    .total {
+      text-align: right;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--green);
+    }
+
+    .checkout-form h2 {
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      background-color: var(--green);
+      color: var(--light);
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #244c3b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Checkout</h1>
+
+  <div class="checkout-container">
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <table id="order-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="total" id="order-total">Total: $0</p>
+    </div>
+
+    <div class="checkout-form">
+      <h2>Shipping Details</h2>
+      <form id="checkoutForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <textarea id="address" placeholder="Shipping Address" required></textarea>
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // ========== Load Cart Items from Local Storage ==========
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const tableBody = document.querySelector("#order-table tbody");
+    const totalElement = document.getElementById("order-total");
+    let total = 0;
+
+    if (cartItems.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Your cart is empty.</td></tr>`;
+    } else {
+      cartItems.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>$${item.price}</td>
+          <td>${item.quantity}</td>
+          <td>$${subtotal}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      totalElement.textContent = `Total: $${total}`;
+    }
+
+    // ========== Handle Form Submission ==========
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for your order, " + document.getElementById("name").value + "!");
+      localStorage.removeItem("cart");
+      window.location.href = "craft.html"; // Redirect back to main page
+    });
+  </script>
+
+</body>
+</html>

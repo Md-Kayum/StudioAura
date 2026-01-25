@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | StudioAura</title>
+
+  <!-- Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="container navbar">
+
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo.png" alt="StudioAura Logo" />
+        <span>StudioAura</span>
+      </a>
+    </div>
+
+    <nav class="nav">
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="craft.html">Shop</a></li>
+        <li><a href="interior.html">Interior Design</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+
+        <li class="mobile-auth">
+          <button class="btn-outline" id="loginBtnMobile">Login</button>
+          <button class="btn" id="registerBtnMobile">Register</button>
+          <button class="btn-outline" id="logoutBtnMobile" style="display:none;">Logout</button>
+        </li>
+      </ul>
+
+      <div class="auth-links desktop-only">
+        <button class="btn-outline" id="loginBtn">Login</button>
+        <button class="btn" id="registerBtn">Register</button>
+        <button class="btn-outline" id="logoutBtn" style="display:none;">Logout</button>
+      </div>
+
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </div>
+    </nav>
+
+  </div>
+</header>
+
+<!-- ================= CONTACT HERO ================= -->
+<section class="contact-hero">
+  <div class="contact-hero-content">
+    <span class="hero-tag">Get in Touch</span>
+    <h1>We’d Love to Hear From You</h1>
+    <p>
+      Whether you have a question, a project idea, or just want to say hello —
+      reach out and we’ll get back to you shortly.
+    </p>
+  </div>
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+<section class="contact-section container">
+  <div class="contact-grid">
+
+    <!-- CONTACT INFO -->
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <div>
+          <h4>Phone</h4>
+          <p>+880 1822-823801</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <h4>Email</h4>
+          <p>graceedenstudio@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fas fa-location-dot"></i>
+        <div>
+          <h4>Location</h4>
+          <p>Dhaka, Bangladesh</p>
+        </div>
+      </div>
+
+      <div class="contact-note">
+        We usually respond within 24 hours on business days.
+      </div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="contact-form">
+      <h2>Send Us a Message</h2>
+
+      <form id="contactForm">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email Address" required />
+        <input type="tel" placeholder="Phone Number" />
+
+        <select required>
+          <option value="">Subject</option>
+          <option>Interior Design Inquiry</option>
+          <option>Custom Furniture</option>
+          <option>Order Question</option>
+          <option>General Inquiry</option>
+        </select>
+
+        <textarea placeholder="Your Message..." required></textarea>
+
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container footer">
+    <div>
+      <h3>StudioAura</h3>
+      <p>Crafted interiors and handcrafted pieces inspired by nature.</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="craft.html">Shop</a></li>
+        <li><a href="interior.html">Interior Design</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <p><i class="fas fa-phone"></i> +880 1822-823801</p>
+      <p><i class="fas fa-envelope"></i> stuiod@aura.com</p>
+    </div>
+  </div>
+
+  <p class="copyright">&copy; 2025 StudioAura</p>
+</footer>
+<!-- ================= CHATBOT WIDGET ================= -->
+<button id="chatToggle" class="chat-toggle" aria-label="Open chat">
+  <i class="fas fa-comment-dots"></i>
+</button>
+
+<div id="chatWidget" class="chat-widget" aria-hidden="true">
+  <div class="chat-header">
+    <div class="chat-title">
+      <span class="dot"></span>
+      StudioAura Assistant
+    </div>
+    <button id="chatClose" class="chat-close" aria-label="Close chat">&times;</button>
+  </div>
+
+  <div id="chatMessages" class="chat-messages">
+    <div class="chat-bubble bot">
+      Hi! I’m StudioAura’s assistant. Ask me about interior design, products, or orders.
+    </div>
+  </div>
+
+  <form id="chatForm" class="chat-input-area">
+    <input id="chatInput" type="text" placeholder="Type your message..." autocomplete="off" />
+    <button type="submit" class="chat-send" aria-label="Send">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </form>
+</div>
+
+<link rel="stylesheet" href="chatbot.css" />
+<script src="chatbot.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>

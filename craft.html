@@ -5,466 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grace Eden Studio - Crafts</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --green: #1F392C;
-      --cream: #FAF8F3;
-      --gold: #D4C9A3;
-      --dark: #111;
-      --light: #fff;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      background-color: var(--cream);
-      color: var(--dark);
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: var(--green);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background-color: var(--light);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-
-    .card img {
-      max-width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      color: var(--green);
-      font-size: 1.3rem;
-    }
-
-    .card .price {
-      margin-bottom: 15px;
-      font-weight: bold;
-      color: var(--gold);
-      font-size: 1.4rem;
-    }
-
-    .options {
-      margin-bottom: 15px;
-    }
-
-    .option-group {
-      margin-bottom: 12px;
-    }
-
-    .option-label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: var(--green);
-      font-size: 0.9rem;
-    }
-
-    .color-picker {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .color-option {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 3px solid transparent;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .color-option:hover {
-      transform: scale(1.1);
-    }
-
-    .color-option.selected {
-      border-color: var(--green);
-      box-shadow: 0 0 0 2px var(--cream), 0 0 0 4px var(--green);
-    }
-
-    .color-option.selected::after {
-      content: '✓';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: var(--light);
-      font-weight: bold;
-      font-size: 16px;
-      text-shadow: 0 0 3px rgba(0,0,0,0.5);
-    }
-
-    .quantity-selector {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .quantity-btn {
-      width: 32px;
-      height: 32px;
-      border: 2px solid var(--green);
-      background: var(--light);
-      color: var(--green);
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .quantity-btn:hover {
-      background: var(--green);
-      color: var(--light);
-    }
-
-    .quantity-input {
-      width: 60px;
-      padding: 6px;
-      text-align: center;
-      border: 2px solid var(--gold);
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--green);
-    }
-
-    .add-to-cart {
-      background-color: var(--green);
-      color: var(--light);
-      border: none;
-      padding: 12px 24px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .add-to-cart:hover {
-      background-color: var(--gold);
-      color: var(--dark);
-      transform: translateY(-2px);
-    }
-
-    .add-to-cart.added {
-      background-color: #4CAF50;
-      cursor: default;
-    }
-
-    .add-to-cart.added:hover {
-      transform: none;
-    }
-
-    .cart-summary {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--green);
-      color: var(--light);
-      padding: 15px 25px;
-      border-radius: 50px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cart-summary:hover {
-      transform: scale(1.05);
-      background: var(--gold);
-      color: var(--dark);
-    }
-
-    .cart-badge {
-      background: var(--gold);
-      color: var(--dark);
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 12px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background: rgba(0,0,0,0.6);
-    }
-
-    .modal-content {
-      background: var(--cream);
-      margin: 5% auto;
-      padding: 30px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 600px;
-      max-height: 80vh;
-      overflow-y: auto;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--gold);
-    }
-
-    .modal-header h2 {
-      color: var(--green);
-      margin: 0;
-    }
-
-    .close {
-      color: var(--dark);
-      font-size: 32px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .close:hover {
-      color: var(--gold);
-    }
-
-    .cart-item {
-      display: flex;
-      gap: 15px;
-      padding: 15px;
-      background: var(--light);
-      border-radius: 10px;
-      margin-bottom: 15px;
-      align-items: center;
-    }
-
-    .cart-item-image {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .cart-item-details {
-      flex: 1;
-    }
-
-    .cart-item-name {
-      font-weight: 600;
-      color: var(--green);
-      margin-bottom: 5px;
-    }
-
-    .cart-item-info {
-      font-size: 0.9rem;
-      color: var(--dark);
-      margin-bottom: 3px;
-    }
-
-    .cart-item-price {
-      font-weight: bold;
-      color: var(--gold);
-      font-size: 1.1rem;
-    }
-
-    .remove-item {
-      background: #dc3545;
-      color: var(--light);
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .remove-item:hover {
-      background: #c82333;
-    }
-
-    .cart-total {
-      text-align: right;
-      padding: 20px 0;
-      border-top: 2px solid var(--gold);
-      margin-top: 20px;
-    }
-
-    .cart-total h3 {
-      color: var(--green);
-      font-size: 1.5rem;
-    }
-
-    .checkout-btn {
-      background: var(--green);
-      color: var(--light);
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 8px;
-      width: 100%;
-      margin-top: 15px;
-      transition: all 0.3s ease;
-    }
-
-    .checkout-btn:hover {
-      background: var(--gold);
-      color: var(--dark);
-    }
-
-    .price-breakdown {
-      background: var(--light);
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      color: var(--dark);
-    }
-
-    .price-row.subtotal {
-      border-bottom: 1px solid var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .price-row.total {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: var(--green);
-      border-top: 2px solid var(--gold);
-      padding-top: 15px;
-      margin-top: 10px;
-    }
-
-    .comment-section {
-      margin-top: 20px;
-      background: var(--light);
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .comment-label {
-      display: block;
-      font-weight: 600;
-      color: var(--green);
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
-
-    .comment-textarea {
-      width: 100%;
-      min-height: 100px;
-      padding: 12px;
-      border: 2px solid var(--gold);
-      border-radius: 8px;
-      font-family: "Poppins", sans-serif;
-      font-size: 14px;
-      resize: vertical;
-      transition: border-color 0.3s;
-    }
-
-    .comment-textarea:focus {
-      outline: none;
-      border-color: var(--green);
-    }
-
-    .comment-textarea::placeholder {
-      color: #999;
-    }
-
-    .empty-cart {
-      text-align: center;
-      padding: 40px;
-      color: var(--green);
-    }
-
-    .empty-cart i {
-      font-size: 64px;
-      margin-bottom: 20px;
-      opacity: 0.3;
-    }
-
-    @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cart-summary {
-        bottom: 10px;
-        right: 10px;
-        padding: 12px 20px;
-      }
-
-      .modal-content {
-        width: 95%;
-        padding: 20px;
-      }
-    }
-  </style>
   
 </head>
 <body>
+<header>
+  <div class="container navbar">
 
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo.png" alt="Grace Eden Studio Logo">
+        <span>StudioAura</span>
+      </a>
+    </div>
+
+    <nav class="nav">
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="craft.html" class="active">Shop</a></li>
+        <li><a href="interior.html">Interior Design</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <!-- Mobile Auth -->
+        <li class="mobile-auth">
+          <button class="btn-outline" id="loginBtnMobile">Login</button>
+          <button class="btn" id="registerBtnMobile">Register</button>
+          <button class="btn-outline" id="logoutBtnMobile" style="display:none;">Logout</button>
+        </li>
+      </ul>
+
+      <!-- Desktop Auth -->
+      <div class="auth-links desktop-only">
+        <button class="btn-outline" id="loginBtn">Login</button>
+        <button class="btn" id="registerBtn">Register</button>
+        <button class="btn-outline" id="logoutBtn" style="display:none;">Logout</button>
+      </div>
+
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </div>
+    </nav>
+
+  </div>
+</header>
   <h1>Our Handcrafted Creations</h1>
 
 <div class="grid">
@@ -791,6 +378,36 @@
     <button class="checkout-btn">Proceed to Checkout</button>
   </div>
 </div>
+<!-- ================= CHATBOT WIDGET ================= -->
+<button id="chatToggle" class="chat-toggle" aria-label="Open chat">
+  <i class="fas fa-comment-dots"></i>
+</button>
+
+<div id="chatWidget" class="chat-widget" aria-hidden="true">
+  <div class="chat-header">
+    <div class="chat-title">
+      <span class="dot"></span>
+      StudioAura Assistant
+    </div>
+    <button id="chatClose" class="chat-close" aria-label="Close chat">&times;</button>
+  </div>
+
+  <div id="chatMessages" class="chat-messages">
+    <div class="chat-bubble bot">
+      Hi! I’m StudioAura’s assistant. Ask me about interior design, products, or orders.
+    </div>
+  </div>
+
+  <form id="chatForm" class="chat-input-area">
+    <input id="chatInput" type="text" placeholder="Type your message..." autocomplete="off" />
+    <button type="submit" class="chat-send" aria-label="Send">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </form>
+</div>
+
+<link rel="stylesheet" href="chatbot.css" />
+<script src="chatbot.js"></script>
 
 
   <script>
@@ -940,21 +557,29 @@
     });
 
     // Checkout button
-    document.querySelector('.checkout-btn').addEventListener('click', () => {
-  if (cart.length === 0) {
-    alert('Your cart is empty!');
+   document.querySelector('.checkout-btn').addEventListener('click', () => {
+  // 🔐 CHECK LOGIN
+  const user = localStorage.getItem("user");
+
+  if (!user) {
+    alert("Please log in to continue to checkout.");
+    window.location.href = "index.html"; // go back to home
     return;
   }
 
-  const comments = document.getElementById('orderComments').value.trim();
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
 
-  // Store cart and comments in localStorage for checkout.html to use
+  const comments = document.getElementById("orderComments").value.trim();
+
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("orderComments", comments);
 
-  // Redirect to checkout.html
   window.location.href = "checkout.html";
 });
+
 
   </script>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout | Tanzu's Creation</title>
+  <title>Checkout | studio Aura </title>
   <style>
     /* ========== Root Colors ========== */
     :root {
@@ -149,6 +149,14 @@
   </div>
 
   <script>
+    // 🔐 PROTECT CHECKOUT PAGE
+const user = localStorage.getItem("user");
+
+if (!user) {
+  alert("Please log in to access checkout.");
+  window.location.href = "index.html";
+}
+
     // ========== Load Cart Items from Local Storage ==========
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
     const tableBody = document.querySelector("#order-table tbody");
@@ -176,12 +184,50 @@
     }
 
     // ========== Handle Form Submission ==========
-    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Thank you for your order, " + document.getElementById("name").value + "!");
-      localStorage.removeItem("cart");
-      window.location.href = "craft.html"; // Redirect back to main page
-    });
+   document.getElementById("checkoutForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const notes = localStorage.getItem("orderComments") || "";
+
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
+  }
+
+  let total = 0;
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+  });
+
+  const payload = {
+    customer_name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    address: document.getElementById("address").value,
+    notes: notes,
+    total_amount: total,
+    cart: cart
+  };
+
+  const res = await fetch("http://localhost:3000/api/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+
+  if (res.ok) {
+    alert("Order placed successfully!");
+    localStorage.removeItem("cart");
+    localStorage.removeItem("orderComments");
+    window.location.href = "craft.html";
+  } else {
+    alert(data.message);
+  }
+});
+
   </script>
 
 </body>

@@ -126,7 +126,7 @@ AI Chatbot Widget
 10. How to Run the Project
 
 Clone the repository using the command:
-git clone https://github.com/your-username/studioaura.git
+git clone https://github.com/Md-kayum/studioaura.git
 
 Install the required backend dependencies using:
 npm install
